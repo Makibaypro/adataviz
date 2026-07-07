@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/main.js" defer></script>
+    <title>adataviz</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img src="./src/assets/parkingLogo.png" alt="logo">
+        <h1>Stationnement sur voie publique</h1>
+        <p>Total :</p>
+        <input type="text" id="search" nom="search" placeholder="rechercher">
+        <button type="button">Filters</button>
+        <section class="filtre">
+          <select id="categorie">
+            <option value="">Choisissez la catégorie</option>
+            <option value="2roue">2 Roues</option>
+            <option value="livraison">Livraison</option>
+            <option value="gig/gic">GIG/GIC</option>
+            <option value="mixte">Mixte</option>
+          </select>
+          <select id="type">
+            <option value="">Choisissez le type de place</option>
+            <option value="bataille">Bataille</option>
+            <option value="epi">Épi</option>
+            <option value="longitudinale">Longitudinale</option>
+          </select>
+          <label for="numberFilter">Nombre de place souhaité :</label>
+          <input type="number" id="numberFilter" nom="numberFilter" placeholder="0">
+        </section>
+      </nav>
+    </header>
+    <main>
+        <section>
+          <button type="button" class="button" ></button>
+          <article class="card">
+            <h2>Nom Voie CarteGauche</h2>
+            <img src="" alt="PictoPlace">
+            <dl>
+              <dt>Type de place</dt>
+              <dd>Livraison</dd>
+
+              <dt>Disposition</dt>
+              <dd>Longitudinale</dd>
+
+              <dt>Longueur et largeur</dt>
+              <dd>X mètre x 1,8 mètre</dd>
+
+              <dt>Nombre de place disponibles (Approx)</dt>
+              <dd>10</dd>
+            </dl>
+          </article>
+          <article class="card">
+            <h2>Nom Voie</h2>
+            <img src="" alt="PictoPlace">
+            <dl>
+              <dt>Type de place</dt>
+              <dd>2 roues</dd>
+
+              <dt>Disposition</dt>
+              <dd>Bataille</dd>
+
+              <dt>Longueur et largeur</dt>
+              <dd>X mètre x X mètre</dd>
+
+              <dt>Nombre de place disponibles (Approx)</dt>
+              <dd>10</dd>
+            </dl>
+          </article>
+          <article class="card">
+            <h2>Nom Voie CarteDroite</h2>
+            <img src="" alt="PictoPlace">
+            <dl>
+              <dt>Type de place</dt>
+              <dd>Payante</dd>
+
+              <dt>Disposition</dt>
+              <dd>Épi</dd>
+
+              <dt>Longueur et largeur</dt>
+              <dd>X mètre x 1,8 mètre</dd>
+
+              <dt>Nombre de place disponibles (Approx)</dt>
+              <dd>10</dd>
+            </dl>
+          </article>
+          <button type="button" class="button" ></button>
+        </section>
+        <section>
+          <iframe src="https://opendata.paris.fr/explore/embed/dataset/stationnement-sur-voie-publique-emprises/map/?disjunctive.regpri&disjunctive.regpar&disjunctive.typsta&disjunctive.arrond&disjunctive.locsta&disjunctive.zoneres&disjunctive.parite&disjunctive.signhor&disjunctive.signvert&disjunctive.confsign&disjunctive.typemob&sort=-regpri&basemap=jawg.dark&location=12,48.85997,2.35828&static=false&datasetcard=false&scrollWheelZoom=false" width="500" height="400" frameborder="0"></iframe>
+        </section>
+    </main>
+  </body>
+</html>
