@@ -32,9 +32,9 @@ fetch("https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/stationnement
     console.log(dataArray);
     const dataTotal = dataArray.length;
     
-    dataArray.forEach(parkingSlot => {
-      insertCard(parkingSlot);
-    });
+    // dataArray.forEach(parkingSlot => {
+    //   insertCard(parkingSlot);
+    // });
 
   // --- Ajout ID ---
     // const dataID = [];
@@ -44,3 +44,17 @@ fetch("https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/stationnement
 
 
   })
+
+
+
+/*
+// === Gestion des ID de cartes pour affichages ---
+if (appelId < 0) {
+  appelId *= -1;
+  centerId = 100 - (appelId % 100);
+} else if (appelId % 100 === 0) {   // <- pas appelId === 0
+  centerId = 100;
+} else {
+  centerId = appelId % 100;
+}
+*/

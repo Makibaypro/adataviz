@@ -1,16 +1,154 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
 
   --primary: #388db0;
   --secondary: #0d2059;
   --grey: #595F61;
   --selector: #680E09;
-  --bg: #16108B;
+  --bg: #051858;
   --bg2: #6F8CF7;
   --search: #66a1b9;
 
   
 }
+.cache {
+  display: none;
+}
 
-*{
-  
+.elementFG {
+    background-color: var(--primary);
+}
+
+.bodyGRP {
+  display: grid;
+  grid-template-rows: 100px 1fr 100px;
+  grid-auto-rows: auto;
+  grid-auto-columns: auto;
+}
+
+.mainGRP {
+  display: grid;
+  background: linear-gradient(135deg,rgba(0, 212, 255, 1) 0%, rgba(9, 69, 118, 1) 20%, rgba(2, 0, 36, 1) 69%);
+  height: 100vh;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr;
+  grid-row: 2/3;
+  gap: 10px;
+  justify-items: stretch;
+  align-items: stretch;
+}
+
+.headerGRP {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  min-height: 0; /* empêche le contenu de forcer la row à grandir */
+  overflow: hidden; /* sécurité si jamais ça dépasse quand même */
+}
+
+.logoP {
+  justify-self: center;
+  width: 100%;
+  height: 100%;
+  grid-row: 1/1;
+  grid-column: 1/1;
+  object-fit: contain;
+  min-height: 0;
+  padding: 10px;
+}
+
+.headerTitle {
+  justify-self: center;
+  align-self: center;
+  grid-row: 1/1;
+  grid-column: 2/2;
+  text-align: center;
+}
+
+.searchGRP {
+  justify-self: center;
+  align-self: end;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px 0px;
+  padding: 10px;  
+}
+
+.searchBar {
+  grid-column: 1/1;
+  grid-row: 2/2;
+}
+
+.resultAmount {
+  grid-column: 1/3;
+  grid-row:1/1;
+}
+
+.filterBTN {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.cardsGRP {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 0.5fr;
+  grid-template-rows: 1fr;
+  grid-row: 1;
+
+}
+
+.cardCenter {
+  justify-self: center;
+  align-self: center;
+  grid-row: 1;
+  grid-column: 2/3;
+  height: 300px;
+  background: var(--primary);
+  width: 30vw;
+  border: 3px solid white;
+}
+
+.cardLeft {
+  justify-self: flex-end;
+  align-self: center;
+  grid-row: 1;
+  grid-column: 1;
+  height: 300px;
+  background: var(--primary);
+  width: 10vw;
+  overflow: hidden;
+  border: 3px solid black;
+}
+
+.cardLeftOut {
+
+}
+
+.cardRight {
+  justify-self: flex-start;
+  align-self: center;
+  grid-row: 1;
+  grid-column: 3;
+  height: 300px;
+  background: var(--primary);
+  width: 10vw;
+  overflow: hidden;
+  border: 3px solid black;
+}
+
+.cardRightOut {
+
+
+}
+
+.map {
+  justify-self: center;
+  align-self: center;
+  grid-row: 2/3;
 }

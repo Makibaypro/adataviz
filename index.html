@@ -4,18 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/style.css">
     <script type="module" src="/src/main.js" defer></script>
     <title>adataviz</title>
   </head>
-  <body>
-    <header>
-      <nav>
-        <img src="./src/assets/parkingLogo.png" alt="logo">
-        <h1>Stationnement sur voie publique</h1>
-        <p>Total :</p>
-        <input type="text" id="search" nom="search" placeholder="rechercher">
-        <button type="button">Filters</button>
-        <section class="filtre">
+  <body class="bodyGRP">
+    <header class="headerGRP elementFG">
+        <img class="logoP" src="./src/assets/parkingLogo.png" alt="logo">
+        <h1 class="headerTitle">Stationnement sur voie publique a Paris</h1>
+
+        <section class="searchGRP">
+          <input class="searchBar" type="text" id="search" name="search" placeholder="rechercher...">
+          <p class="resultAmount">Resultats trouves :</p>
+          <button type="button" class="filterBTN">Filters</button>
+        </section>
+
+        <section class="filtrePanel cache">
           <select id="categorie">
             <option value="">Choisissez la catégorie</option>
             <option value="2roue">2 Roues</option>
@@ -23,21 +27,32 @@
             <option value="gig/gic">GIG/GIC</option>
             <option value="mixte">Mixte</option>
           </select>
+
           <select id="type">
             <option value="">Choisissez le type de place</option>
             <option value="bataille">Bataille</option>
             <option value="epi">Épi</option>
             <option value="longitudinale">Longitudinale</option>
           </select>
+
           <label for="numberFilter">Nombre de place souhaité :</label>
-          <input type="number" id="numberFilter" nom="numberFilter" placeholder="0">
+          <input type="number" id="numberFilter" name="numberFilter" placeholder="0" class="inputBarre">
+
+          <span>
+            <input class="inputBarre" type="number" id="longueur" name="longueur" placeholder="0m">
+            <p>x</p>
+            <input class="inputBarre" type="number" id="largeur" name="largeur" placeholder="0m">
+          </span>
+
         </section>
-      </nav>
     </header>
-    <main>
-        <section>
-          <button type="button" class="button" ></button>
-          <article class="card">
+
+    <main class="mainGRP">
+        <section class="cardsGRP">
+
+          <button type="button" class="button cache" ></button>
+
+          <article class="cardLeft">
             <h2>Nom Voie CarteGauche</h2>
             <img src="" alt="PictoPlace">
             <dl>
@@ -54,7 +69,8 @@
               <dd>10</dd>
             </dl>
           </article>
-          <article class="card">
+
+          <article class="cardCenter ">
             <h2>Nom Voie</h2>
             <img src="" alt="PictoPlace">
             <dl>
@@ -71,9 +87,13 @@
               <dd>10</dd>
             </dl>
           </article>
-          <article class="card">
+
+          <article class="cardRight">
+
             <h2>Nom Voie CarteDroite</h2>
+
             <img src="" alt="PictoPlace">
+
             <dl>
               <dt>Type de place</dt>
               <dd>Payante</dd>
@@ -88,11 +108,21 @@
               <dd>10</dd>
             </dl>
           </article>
-          <button type="button" class="button" ></button>
+
+          <button type="button" class="button cache" ></button>
+
         </section>
-        <section>
+        
+        <section class="map">
+
           <iframe src="https://opendata.paris.fr/explore/embed/dataset/stationnement-sur-voie-publique-emprises/map/?disjunctive.regpri&disjunctive.regpar&disjunctive.typsta&disjunctive.arrond&disjunctive.locsta&disjunctive.zoneres&disjunctive.parite&disjunctive.signhor&disjunctive.signvert&disjunctive.confsign&disjunctive.typemob&sort=-regpri&basemap=jawg.dark&location=12,48.85997,2.35828&static=false&datasetcard=false&scrollWheelZoom=false" width="500" height="400" frameborder="0"></iframe>
+
         </section>
     </main>
+
+    <footer class="footer elementFG">
+
+    </footer>
+
   </body>
 </html>
