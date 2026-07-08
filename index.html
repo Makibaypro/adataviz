@@ -9,13 +9,15 @@
     <title>adataviz</title>
   </head>
   <body class="bodyGRP">
+
+    <img class="bgImg" src="./src/assets/bgImg.png" alt="image de fond"/>
     <header class="headerGRP elementFG">
         <img class="logoP" src="./src/assets/parkingLogo.png" alt="logo">
         <h1 class="headerTitle">Stationnement sur voie publique a Paris</h1>
 
         <section class="searchGRP">
           <input class="searchBar" type="text" id="search" name="search" placeholder="rechercher...">
-          <p class="resultAmount">Resultats trouves :</p>
+          <p class="resultAmount">Résultats trouvés :</p>
           <button type="button" class="filterBTN">Filters</button>
         </section>
 
@@ -38,11 +40,11 @@
           <label for="numberFilter">Nombre de place souhaité :</label>
           <input type="number" id="numberFilter" name="numberFilter" placeholder="0" class="inputBarre">
 
-          <span>
+          <div>
             <input class="inputBarre" type="number" id="longueur" name="longueur" placeholder="0m">
             <p>x</p>
             <input class="inputBarre" type="number" id="largeur" name="largeur" placeholder="0m">
-          </span>
+          </div>
 
         </section>
     </header>
@@ -50,66 +52,71 @@
     <main class="mainGRP">
         <section class="cardsGRP">
 
-          <button type="button" class="button cache" ></button>
+          <button type="button" class="buttonLeft buttonShape " >←</button>
 
-          <article class="cardLeft">
+          <article class="card left">
             <h2>Nom Voie CarteGauche</h2>
-            <img src="" alt="PictoPlace">
+            
+            <img src="./src/assets/motorcycle.png" alt="PictoPlace" class="imgSide">
             <dl>
-              <dt>Type de place</dt>
+              <dt class="infosType" >Type de place :</dt>
               <dd>Livraison</dd>
 
-              <dt>Disposition</dt>
+              <dt class="infosType" >Disposition :</dt>
               <dd>Longitudinale</dd>
 
-              <dt>Longueur et largeur</dt>
+              <dt class="infosType" >Longueur et largeur :</dt>
               <dd>X mètre x 1,8 mètre</dd>
 
-              <dt>Nombre de place disponibles (Approx)</dt>
+              <dt class="infosType" >Nb. de place (Approx)</dt>
               <dd>10</dd>
             </dl>
           </article>
 
-          <article class="cardCenter ">
+          <article class="card center ">
             <h2>Nom Voie</h2>
-            <img src="" alt="PictoPlace">
-            <dl>
-              <dt>Type de place</dt>
-              <dd>2 roues</dd>
 
-              <dt>Disposition</dt>
+            <img src="./src/assets/truck.png" alt="PictoPlace" class="imgCenter">
+
+            <dl class="infos" >
+              <dt class="infosType" >Type de place</dt>
+              <dd>Livraison</dd>
+
+              <dt class="infosType" >Disposition</dt>
               <dd>Bataille</dd>
 
-              <dt>Longueur et largeur</dt>
-              <dd>X mètre x X mètre</dd>
+              <dt class="infosType" >Longueur</dt>
+              <dd>X mètre</dd>
 
-              <dt>Nombre de place disponibles (Approx)</dt>
+              <dt class="infosType" >Largeur</dt>
+              <dd>X mètre</dd>
+
+              <dt class="infosType" >Nb. de place (Approx)</dt>
               <dd>10</dd>
             </dl>
           </article>
 
-          <article class="cardRight">
-
+          <article class="card right">
             <h2>Nom Voie CarteDroite</h2>
 
-            <img src="" alt="PictoPlace">
+            <img src="./src/assets/car.png" alt="PictoPlace" class="imgSide">
 
             <dl>
-              <dt>Type de place</dt>
-              <dd>Payante</dd>
+              <dt class="infosType" >Type de place</dt>
+              <dd>Mixte</dd>
 
-              <dt>Disposition</dt>
+              <dt class="infosType" >Disposition</dt>
               <dd>Épi</dd>
 
-              <dt>Longueur et largeur</dt>
+              <dt class="infosType" >Longueur et largeur</dt>
               <dd>X mètre x 1,8 mètre</dd>
 
-              <dt>Nombre de place disponibles (Approx)</dt>
+              <dt class="infosType" >Nb. de place (Approx)</dt>
               <dd>10</dd>
             </dl>
           </article>
 
-          <button type="button" class="button cache" ></button>
+          <button type="button" class="buttonRight buttonShape" >→</button>
 
         </section>
         

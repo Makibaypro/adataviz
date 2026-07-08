@@ -23,19 +23,49 @@
 }
 
 .elementFG {
-    background-color: var(--primary);
+    background: linear-gradient(var(--primary) 95%, transparent);
+}
+
+.imgSide {
+  width: 25px;
+}
+
+.imgCenter {
+  width: 75px;
+}
+
+.buttonShape {
+  padding: 10px;
+  width: fit-content;
+  border-radius: 40px;
+  border: 0px;
+}
+
+.buttonShape:active{
+  background-color: var(--bg);
+  color: var(--search);
+}
+
+.bgImg {
+  position: absolute;
+  z-index: -1;
+  filter: blur(5px);
+  width: 110vw;
+  height: 110vh;
+  left: -1%;
 }
 
 .bodyGRP {
   display: grid;
-  grid-template-rows: 100px 1fr 100px;
+  grid-template-rows: 75px 1fr 75px;
   grid-auto-rows: auto;
   grid-auto-columns: auto;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .mainGRP {
   display: grid;
-  background: linear-gradient(135deg,rgba(0, 212, 255, 1) 0%, rgba(9, 69, 118, 1) 20%, rgba(2, 0, 36, 1) 69%);
   height: 100vh;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr;
@@ -103,48 +133,102 @@
 
 }
 
-.cardCenter {
+.card {
   justify-self: center;
   align-self: center;
-  grid-row: 1;
-  grid-column: 2/3;
   height: 300px;
   background: var(--primary);
-  width: 30vw;
   border: 3px solid white;
+  border-radius: 30px;
+  text-align: center;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.cardLeft {
+.center {
+  grid-row: 1;
+  grid-column: 2/3;
+  transform: scale(100%) rotateY(0deg);
+  border: 3px solid white;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.left{
   justify-self: flex-end;
   align-self: center;
   grid-row: 1;
   grid-column: 1;
-  height: 300px;
-  background: var(--primary);
-  width: 10vw;
   overflow: hidden;
-  border: 3px solid black;
+  border: 3px solid rgb(87, 87, 87);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: rotateY(70deg) scale(50%);
+  filter: blur(2px);
 }
 
-.cardLeftOut {
-
-}
-
-.cardRight {
+.right {
   justify-self: flex-start;
   align-self: center;
   grid-row: 1;
   grid-column: 3;
-  height: 300px;
-  background: var(--primary);
-  width: 10vw;
   overflow: hidden;
-  border: 3px solid black;
+  border: 3px solid rgb(87, 87, 87);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  filter: blur(2px);
+  transform: rotateY(-70deg) scale(50%);
 }
 
-.cardRightOut {
+.leftOut {
 
+}
 
+.rightOut {
+
+}
+
+.hider {
+  display: none;
+}
+
+.infos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4 1fr);
+  padding: 5px;
+  gap: 5px;
+}
+
+.infosType {
+font-weight: bold;
+}
+
+.buttonLeft {
+  align-self: center;
+  grid-row: 1;
+  grid-column: 1;
+  margin-left: 20px;
+}
+
+.buttonRight {
+  justify-self: flex-end;
+  align-self: center;
+  grid-row: 1;
+  grid-column: 3;
+  margin-right: 20px;
 }
 
 .map {
