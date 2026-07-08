@@ -26,74 +26,28 @@ const insertCard = (parkingSlot) => {
   else if(parkingSlot.regpri === "PAYANT MIXTE" || parkingSlot.regpri === "PAYANT ROTATIF") img = "./src/assets/car.png";
   else if(parkingSlot.regpri === "AUTRE REGIME") img = "./src/assets/car.png";
 
-  let card = `<article class="card cache" data-id="${parkingSlot.id}">
+  let card = `<article class="card" data-id="${parkingSlot.id}">
         <h2>${parkingSlot.typevoie} ${parkingSlot.nomvoie}</h2>
-        <img src="${img}" alt="PictoPlace" class="imgSide"/>
+        <img src="${img}" alt="PictoPlace" class="imgSize"/>
         <dl class="infos" >
-          <dt class="infosType" >Type de place</dt>
+          <dt class="infosType" >Type de place :</dt>
           <dd class="infosData">${parkingSlot.regpri}</dd>
 
-          <dt class="infosType" >Disposition</dt>
+          <dt class="infosType" >Disposition :</dt>
           <dd class="infosData">${parkingSlot.typsta}</dd>
 
-          <dt class="infosType" >Longueur</dt>
+          <dt class="infosType" >Longueur :</dt>
           <dd class="infosData">${parkingSlot.lon.toFixed(2)} mètre</dd>
 
-          <dt class="infosType" >Largeur</dt>
+          <dt class="infosType" >Largeur :</dt>
           <dd class="infosData">${parkingSlot.lar} mètre</dd>
 
-          <dt class="infosType" >Nb. de place (Approx)</dt>
+          <dt class="infosType" >Nb. de place (Approx):</dt>
           <dd class="infosData">${parkingSlot.plarel}</dd>
         </dl>
   </article>`
   cardsGRP.insertAdjacentHTML("beforeend", card);
 };
-
-// --- Fonction affichage ---
-const displayCardCenter = (card) => {
-  card.classList.add("center");
-  card.classList.remove("left");
-  card.classList.remove("right");
-  card.classList.remove("rightOut");
-  card.classList.remove("leftOut");
-  card.classList.remove("cache");
-}
-
-const addLeft = (card) => {
-  card.classList.add("left");
-  card.classList.remove("center");
-  card.classList.remove("right");
-  card.classList.remove("rightOut");
-  card.classList.remove("leftOut");
-  card.classList.remove("cache");
-}
-
-const addLeftOut = (card) => {
-  card.classList.add("leftOut");
-  card.classList.remove("center");
-  card.classList.remove("right");
-  card.classList.remove("rightOut");
-  card.classList.remove("left");
-  card.classList.add("cache");
-}
-
-const addRight = (card) => {
-  card.classList.add("right");
-  card.classList.remove("left");
-  card.classList.remove("center");
-  card.classList.remove("rightOut");
-  card.classList.remove("leftOut");
-  card.classList.remove("cache");
-}
-
-const addRightOut = (card) => {
-  card.classList.add("rightOut");
-  card.classList.remove("left");
-  card.classList.remove("center");
-  card.classList.remove("right");
-  card.classList.remove("leftOut");
-  card.classList.add("cache");
-}
 
 export const dataTotal = async (link) => {
   try {
@@ -109,26 +63,7 @@ export const dataTotal = async (link) => {
 
 //--- Fonction Selection Card ---
 export const cardSwitch = (centerValue, dataTotal) => {
-  let centerId = 3;
-if (centerValue < 0) {
-  centerValue *= -1;
-  centerId = dataTotal - (centerValue % dataTotal);
-} else if (centerValue % dataTotal === 0) {
-  centerId = dataTotal;
-} else {
-  centerId = centerValue % dataTotal;
-}
 
-let cardCenter = document.querySelector(`[data-id="${centerId}"]`);
-let cardLeft = document.querySelector(`[data-id="${centerId-1}"]`);
-let cardLeftOut = document.querySelector(`[data-id="${centerId-2}"]`);
-let cardRight = document.querySelector(`[data-id="${centerId+1}"]`);
-let cardRightOut = document.querySelector(`[data-id="${centerId+2}"]`);
-displayCardCenter(cardCenter);
-addLeft(cardLeft);
-addLeftOut(cardLeftOut);
-addRight(cardRight);
-addRightOut(cardRightOut);
 }
 
 // --- Recuperation des donnés ---

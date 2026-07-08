@@ -23,8 +23,8 @@
     background: linear-gradient(var(--primary));
 }
 
-.imgSide {
-  width: 25px;
+.imgSize {
+  width: 70px;
 }
 
 .imgCenter {
@@ -32,10 +32,12 @@
 }
 
 .buttonShape {
-  padding: 10px;
+  padding: 30px;
   width: fit-content;
-  border-radius: 40px;
+  border-radius: 600px;
   border: 0px;
+  font-size: xx-large;
+  color: rgb(11, 29, 109);
 }
 
 .buttonShape:active{
@@ -61,13 +63,18 @@
   overflow: hidden;
 }
 
+.footer {
+  height: 100%;
+  bottom: 10%;
+  grid-row: 3/4;
+}
+
 .mainGRP {
   display: grid;
   height: 100vh;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr;
   grid-row: 2/3;
-  gap: 10px;
   justify-items: stretch;
   align-items: stretch;
 }
@@ -122,9 +129,20 @@
   grid-row: 2;
 }
 
+.cardsWindow {
+  background: linear-gradient(rgba(255, 0, 0, 0) 0%,rgb(243, 229, 210) 20%, rgb(243, 229, 210) 90%, rgba(255, 0, 0, 0));
+  width: calc(3 * (30vw + 38px));
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 20px 0px;
+  position: relative;
+  align-self: center;
+}
+
 .cardsGRP {
   display: flex;
   align-items: center;
+  transition: transform 0.4s ease;
 }
 
 .card {
@@ -136,25 +154,41 @@
   border-radius: 30px;
   text-align: center;
   width: 30vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: space-around;
+  margin: 0px 2.5vw;
+  display: grid;
+  grid-template-rows: 0.25fr 0.25fr 1fr;
   color: var(--text);
-  transition: transform 1s ease-out, filter 0.4s ease;
+  overflow: hidden;
+  flex-shrink: 0; /*Avoiding shrinking due to the size of the container*/
+  box-shadow: 10px 10px 10px black;
+}
+
+.card h2 {
+  grid-row: 1;
+  align-self: center;
+}
+
+.card img {
+  grid-row: 2;
+  justify-self: center;
+  align-self: center;
+}
+
+.infos {
+  grid-row: 3;
 }
 
 .infosType{
   justify-self: flex-start;
+  margin-left: 3%;
 }
 
 .infosData {
   justify-self: flex-end;
-
+  margin-right: 3%;
 }
 
-.center {
-  transform: rotateY(0deg) scale(100%) translate(0) skewY(0);
+/* .center {
   border: 3px solid white;
   border-radius: 30px;
   display: flex;
@@ -170,11 +204,6 @@
   border: 3px solid rgb(87, 87, 87);
   border-radius: 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transform: rotateY(-80deg) scale(50%) translate(-175%) skewY(-2deg);
-  filter: blur(2px);
 
 }
 
@@ -188,8 +217,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: rotateY(80deg) scale(50%) translate(75%) skewY(2deg);
-  filter: blur(2px);
 }
 
 .leftOut {
@@ -202,8 +229,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: rotateY(70deg) scale(10%);
-  filter: blur(2px);
 }
 
 .rightOut {
@@ -216,9 +241,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: rotateY(-70deg) scale(10%);
-  filter: blur(2px);
-}
+} */
 
 .infos {
   display: grid;
@@ -230,18 +253,21 @@
 
 .infosType {
 font-weight: bold;
+text-align:left;
 }
 
 .buttonLeft {
-  align-self: center;
+  position: absolute;
+  left: 5%;
+  top: 50%;
   margin-left: 20px;
 }
 
 .buttonRight {
-  justify-self: flex-end;
-  align-self: center;
+  position: absolute;
+  right: 5%;
+  top: 50%;
   margin-right: 20px;
-  order: 5;
 }
 
 .map {
