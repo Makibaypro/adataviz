@@ -1,14 +1,18 @@
-import {formaterData} from "./utils.js"
+import {formaterData, cardSwitch} from "./utils.js"
 
 const btnLeft = document.querySelector(".buttonLeft");
 const btnRight = document.querySelector(".buttonRight");
+const resultsAmount = document.querySelector(".resultAmount");
 
-let centerValue = 0;
+let centerValue = 3;
+let dataTotal = 0;
 
-formaterData("https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/stationnement-sur-voie-publique-emprises/records?limit=100");
-
-
-
+formaterData("https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/stationnement-sur-voie-publique-emprises/records?limit=100")
+  .then(total => {
+    dataTotal = total;
+    cardSwitch(centerValue, dataTotal)
+    resultsAmount.textContent = `Résultats trouvés : ${dataTotal}`;
+  })
 
 /*
 // === Gestion des ID de cartes pour affichages ---
@@ -26,9 +30,11 @@ if (appelId < 0) {
 btnLeft.addEventListener("click", () => {
   centerValue -= 1;
   console.log(centerValue);
+  cardSwitch(centerValue, dataTotal)
 })
 
 btnRight.addEventListener("click", () => {
   centerValue += 1;
   console.log(centerValue);
+  cardSwitch(centerValue, dataTotal)
 })
