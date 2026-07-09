@@ -12,30 +12,34 @@ const link = "https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/statio
 let centerValue = 0;
 let dataTotal = 0;
 btnLeft.disabled = true;
+let centerCard = null;
+let research = "";
 
 
-const centerCard = document.querySelector(`[data-id="${centerValue}"]`);
 
 
 
 
 const main = async () => {
+  const data = await formaterData(link);
 
-  displayCard(link);
+  resultsAmount.textContent = `Résultats trouvés : ${data.total}`;
+  dataTotal = data.total;
+
+  displayCard(data);
+  const cards = document.querySelectorAll(".card");
+  centerCard = document.querySelector(`[data-id="${centerValue}"]`);
+  console.log(research)
+
   cardSwitch(centerValue, rail, centerCard);
   
 
 
 }
 
-formaterData("https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/stationnement-sur-voie-publique-emprises/records?limit=100")
-  .then(data => {
-    dataTotal = data.total;
-    // resultsAmount.textContent = `Résultats trouvés : ${dataTotal}`;
-    // cardSwitch(centerValue);
-  });
 
 
+// --- On appel la fonction.
 main();
 
 
@@ -50,7 +54,7 @@ main();
 
 
 searchBar.addEventListener("input", event => {
-  filter(event.target.value);
+    research = event.target.value;
 })
 
 btnFilter.addEventListener("click", () => {
@@ -60,17 +64,23 @@ btnFilter.addEventListener("click", () => {
 btnLeft.addEventListener("click", () => {
   if (centerValue > 0) {
     centerValue -= 1;
-    cardSwitch(centerValue);
+    centerCard = document.querySelector(`[data-id="${centerValue}"]`);
+    cardSwitch(centerValue, rail, centerCard);
     btnRight.disabled = false;
   }
   if (centerValue === 0) btnLeft.disabled = true;
+
+  console.log(centerValue);
 });
 
 btnRight.addEventListener("click", () => {
   if (centerValue < dataTotal - 1) {
     centerValue += 1;
-    cardSwitch(centerValue);
+    centerCard = document.querySelector(`[data-id="${centerValue}"]`);
+    cardSwitch(centerValue, rail, centerCard);
     btnLeft.disabled = false;
   }
   if (centerValue === dataTotal - 1) btnRight.disabled = true;
+
+  console.log(centerValue);
 });

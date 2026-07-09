@@ -20,24 +20,6 @@ const addID = (dataArray) => {
   return dataID;
 }
 
-// --- Récuperation des données ---
-export const formaterData = async (link) => {
-  try {
-    const response = await fetch(link);
-    const data = await response.json();
-    // console.log("data :" + data);
-    const dataArray = data.results;
-    // console.log("dataArray :" + dataArray);
-    const dataTotal = dataArray.length;
-    const dataFinal = addID(dataArray);
-    // console.log("dataID :" + dataFinal[2].id);
-    return { total: dataTotal, array: dataFinal }
-
-  } catch (error){
-    console.error(error.message);
-  }
-}
-
 // --- Creation des cartes ---
 const insertCard = (parkingSlot) => {
   let img = "";
@@ -70,27 +52,47 @@ const insertCard = (parkingSlot) => {
   cardsGRP.insertAdjacentHTML("beforeend", card);
 };
 
-//--- Afficher les cartes ---
-export const displayCard = async (link, callback) => {
+// --- Filter Fonction ---
+export const filtre = (dataArray) => {
+
+  
+}
+
+
+// --- Récuperation des données ---
+export const formaterData = async (link) => {
   try {
-    const dataFinal = await formaterData(link);
-    
+    const response = await fetch(link);
+    const data = await response.json();
+    // console.log("data :" + data);
+    const dataArray = data.results;
+    // console.log("dataArray :" + dataArray);
+    const dataTotal = dataArray.length;
+    const dataFinal = addID(dataArray);
+    // console.log("dataID :" + dataFinal[2].id);
+    return { total: dataTotal, array: dataFinal }
+
+  } catch (error){
+    console.error(error.message);
+  }
+}
+
+
+//--- Afficher les cartes ---
+export const displayCard = (data, callback) => {
     if(callback){
-      callback(dataFinal.array);
+      callback(data.array);
     }
 
-    dataFinal.array.forEach(parkingSlot => {
+    data.array.forEach(parkingSlot => {
       insertCard(parkingSlot);
     });
-
-
-  } catch (error) {
-      console.error(error.message);
-  }
 }
 
 //--- Fonction Slider ---
 export const cardSwitch = (centerValue, rail, centerCard) => {
+    console.log("test");
+    
   // --- On applique un scale de 1 sur toute les cartes pour que seule la
   // --- selectionner sois modifier
   document.querySelectorAll('.card').forEach(card => {
@@ -109,15 +111,10 @@ export const cardSwitch = (centerValue, rail, centerCard) => {
 
 }
 
-const dataTotal = async () => {
-  
-}
-
-
 // --- Recherche fonction ---
-export const filter = async (word, callback) => {
-  let dataFiltered = dataFinal.array.filter((element) => element.nomvoie.includes(word))
+export const filter = (word, data) => {
+  let dataFiltered = data.array.filter((element) => element.nomvoie.includes(word))
 
-  displayCard(dataFiltered);
+  return dataFiltered;
 
 }
