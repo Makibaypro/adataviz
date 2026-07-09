@@ -9,7 +9,9 @@ const cardsGRP = document.querySelector(".cardsGRP");
 
 
 // --- FONCTIONS ---
+// -----------------
 
+// --- Ajout d'ID ---
 const addID = (dataArray) => {
   const dataID = [];
   for(let i = 0; i < dataArray.length;i++){
@@ -18,6 +20,25 @@ const addID = (dataArray) => {
   return dataID;
 }
 
+// --- Récuperation des données ---
+export const formaterData = async (link) => {
+  try {
+    const response = await fetch(link);
+    const data = await response.json();
+    // console.log("data :" + data);
+    const dataArray = data.results;
+    // console.log("dataArray :" + dataArray);
+    const dataTotal = dataArray.length;
+    const dataFinal = addID(dataArray);
+    // console.log("dataID :" + dataFinal[2].id);
+    return { total: dataTotal, array: dataFinal }
+
+  } catch (error){
+    console.error(error.message);
+  }
+}
+
+// --- Creation des cartes ---
 const insertCard = (parkingSlot) => {
   let img = "";
   if(parkingSlot.regpri === "LIVRAISON") img = "./src/assets/truck.png";
@@ -49,46 +70,54 @@ const insertCard = (parkingSlot) => {
   cardsGRP.insertAdjacentHTML("beforeend", card);
 };
 
-export const dataTotal = async (link) => {
+//--- Afficher les cartes ---
+export const displayCard = async (link, callback) => {
   try {
-    const response = await fetch(link);
-    const data = await response.json();
-    const dataArray = data.results;
-    const dataTotal = dataArray.length;
-  } catch (error){
-    console.error(error.message);
-  }
-  return console.log(dataTotal);
-}
+    const dataFinal = await formaterData(link);
+    
+    if(callback){
+      callback(dataFinal.array);
+    }
 
-//--- Fonction Selection Card ---
-export const cardSwitch = (centerValue) => {
-  const stepX = 33;
-  const offset = -(centerValue - 1) * stepX;
-  document.querySelector(".cardsGRP").style.transform = `translateX(${offset}vw)`;
-}
-
-// --- Recuperation des donnés ---
-export const formaterData = async (link) => {
-  try {
-    const response = await fetch(link);
-    const data = await response.json();
-    console.log("data :" + data);
-
-    const dataArray = data.results;
-    console.log("dataArray :" + dataArray);
-
-    const dataTotal = dataArray.length;
-
-    const dataFinal = addID(dataArray);
-    console.log("dataID :" + dataFinal[2].id);
-
-    dataFinal.forEach(parkingSlot => {
+    dataFinal.array.forEach(parkingSlot => {
       insertCard(parkingSlot);
     });
 
-    return dataTotal
-  } catch (error){
-    console.error(error.message);
+
+  } catch (error) {
+      console.error(error.message);
   }
+}
+
+//--- Fonction Slider ---
+export const cardSwitch = (centerValue, rail, centerCard) => {
+  // --- On applique un scale de 1 sur toute les cartes pour que seule la
+  // --- selectionner sois modifier
+  document.querySelectorAll('.card').forEach(card => {
+    card.style.transform = 'scale(0.9)';
+  });
+  // --- On met la valeur a 33 pour decaler la premiere carte au milieu ---
+  const stepX = 33;
+  // --- On calcul le nombre de fois ou on doit decaler vers la gauche
+  // --- avec le -() sinon valeur positif et on part a droite
+  const offset = -(centerValue - 1) * stepX;
+  // --- on applique le resultat en style inline sur le groupe des cartes
+  if (rail) rail.style.transform = `translateX(${offset}vw)`;
+  // --- les if verifient que le chargement est bien fait et annule une erreur
+  // --- ou on pourrait avoir un null au chargement de la page
+  if (centerCard) centerCard.style.transform = `scale(1.1)`;
+
+}
+
+const dataTotal = async () => {
+  
+}
+
+
+// --- Recherche fonction ---
+export const filter = async (word, callback) => {
+  let dataFiltered = dataFinal.array.filter((element) => element.nomvoie.includes(word))
+
+  displayCard(dataFiltered);
+
 }

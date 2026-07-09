@@ -1,54 +1,76 @@
-import {formaterData, cardSwitch} from "./utils.js"
+import {formaterData, cardSwitch, displayCard, filter } from "./utils.js"
 
 const btnLeft = document.querySelector(".buttonLeft");
 const btnRight = document.querySelector(".buttonRight");
+const btnFilter = document.querySelector(".filterBTN");
 const resultsAmount = document.querySelector(".resultAmount");
+const searchBar = document.querySelector(".searchBar");
+const filterPanel = document.querySelector(".filterPanel");
+const rail = document.querySelector(".cardsGRP");
+const link = "https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/stationnement-sur-voie-publique-emprises/records?limit=100";
 
 let centerValue = 0;
 let dataTotal = 0;
 btnLeft.disabled = true;
 
 
-formaterData("https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/stationnement-sur-voie-publique-emprises/records?limit=100")
-  .then(total => {
-    dataTotal = total;
-    cardSwitch(centerValue, dataTotal)
-    resultsAmount.textContent = `Résultats trouvés : ${dataTotal}`;
-  })
+const centerCard = document.querySelector(`[data-id="${centerValue}"]`);
 
-/*
-// === Gestion des ID de cartes pour affichages ---
-if (appelId < 0) {
-  appelId *= -1;
-  centerId = 100 - (appelId % 100);
-} else if (appelId % 100 === 0) {   // <- pas appelId === 0
-  centerId = 100;
-} else {
-  centerId = appelId % 100;
+
+
+
+const main = async () => {
+
+  displayCard(link);
+  cardSwitch(centerValue, rail, centerCard);
+  
+
+
 }
-*/
 
+formaterData("https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/stationnement-sur-voie-publique-emprises/records?limit=100")
+  .then(data => {
+    dataTotal = data.total;
+    // resultsAmount.textContent = `Résultats trouvés : ${dataTotal}`;
+    // cardSwitch(centerValue);
+  });
+
+
+main();
+
+
+
+
+
+
+
+
+
+
+
+
+searchBar.addEventListener("input", event => {
+  filter(event.target.value);
+})
+
+btnFilter.addEventListener("click", () => {
+  filterPanel.classList.toggle("cache");
+})
 
 btnLeft.addEventListener("click", () => {
-  if(centerValue > 0){
+  if (centerValue > 0) {
     centerValue -= 1;
-    console.log(centerValue);
     cardSwitch(centerValue);
     btnRight.disabled = false;
-  } else {
-    btnLeft.disabled = true;
   }
-})
+  if (centerValue === 0) btnLeft.disabled = true;
+});
 
 btnRight.addEventListener("click", () => {
-  if(centerValue < dataTotal){
+  if (centerValue < dataTotal - 1) {
     centerValue += 1;
-    console.log(centerValue);
-    cardSwitch(centerValue)
-    if(centerValue > 0){
+    cardSwitch(centerValue);
     btnLeft.disabled = false;
-    }
-  } else if (centerValue === dataTotal - 1){
-    btnRight.disabled = true;
   }
-})
+  if (centerValue === dataTotal - 1) btnRight.disabled = true;
+});
