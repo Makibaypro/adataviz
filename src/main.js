@@ -13,6 +13,7 @@ let centerValue = 0;
 let dataTotal = 0;
 btnLeft.disabled = true;
 let centerCard = null;
+let dataGlobal = [];
 let research = "";
 
 
@@ -25,6 +26,7 @@ const main = async () => {
 
   resultsAmount.textContent = `Résultats trouvés : ${data.total}`;
   dataTotal = data.total;
+  dataGlobal = data.array;
 
   displayCard(data);
   const cards = document.querySelectorAll(".card");
