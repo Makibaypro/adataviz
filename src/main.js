@@ -1,4 +1,4 @@
-import {formaterData, cardSwitch, displayCard, filter } from "./utils.js"
+import {formaterData, cardSwitch, displayCard, filtre } from "./utils.js"
 
 const btnLeft = document.querySelector(".buttonLeft");
 const btnRight = document.querySelector(".buttonRight");
@@ -13,7 +13,8 @@ let centerValue = 0;
 let dataTotal = 0;
 btnLeft.disabled = true;
 let centerCard = null;
-let dataGlobal = [];
+let dataGlobal = {};
+let dataFiltered = []
 let research = "";
 
 
@@ -22,16 +23,16 @@ let research = "";
 
 
 const main = async () => {
-  const data = await formaterData(link);
+  let data = await formaterData(link);
 
   resultsAmount.textContent = `Résultats trouvés : ${data.total}`;
   dataTotal = data.total;
-  dataGlobal = data.array;
+  dataGlobal = data;
 
-  displayCard(data);
+  
+  displayCard(dataGlobal, rail);
   const cards = document.querySelectorAll(".card");
   centerCard = document.querySelector(`[data-id="${centerValue}"]`);
-  console.log(research)
 
   cardSwitch(centerValue, rail, centerCard);
   
@@ -57,6 +58,16 @@ main();
 
 searchBar.addEventListener("input", event => {
     research = event.target.value;
+    dataFiltered = filtre(dataGlobal, research);
+    rail.innerHTML = "";
+    centerValue = 0;
+    displayCard(dataFiltered, rail);
+    centerCard = document.querySelector(`[data-id="${centerValue}"]`);
+    cardSwitch(centerValue, rail, centerCard);
+    dataTotal = dataFiltered.total;
+    resultsAmount.textContent = `Résultats trouvés : ${dataTotal}`;
+    btnLeft.disabled = (centerValue === 0);
+    btnRight.disabled = ( centerValue === dataTotal - 1);
 })
 
 btnFilter.addEventListener("click", () => {
@@ -70,9 +81,8 @@ btnLeft.addEventListener("click", () => {
     cardSwitch(centerValue, rail, centerCard);
     btnRight.disabled = false;
   }
-  if (centerValue === 0) btnLeft.disabled = true;
+    btnLeft.disabled = (centerValue === 0);
 
-  console.log(centerValue);
 });
 
 btnRight.addEventListener("click", () => {
@@ -82,7 +92,6 @@ btnRight.addEventListener("click", () => {
     cardSwitch(centerValue, rail, centerCard);
     btnLeft.disabled = false;
   }
-  if (centerValue === dataTotal - 1) btnRight.disabled = true;
+    btnRight.disabled = (centerValue === dataTotal - 1);
 
-  console.log(centerValue);
 });
