@@ -23,11 +23,10 @@ let research = "";
 
 
 const main = async () => {
-  let data = await formaterData(link);
+  dataGlobal = await formaterData(link);
 
-  resultsAmount.textContent = `Résultats trouvés : ${data.total}`;
-  dataTotal = data.total;
-  dataGlobal = data;
+  resultsAmount.textContent = `Résultats trouvés : ${dataGlobal.total}`;
+  dataTotal = dataGlobal.total;
 
   
   displayCard(dataGlobal, rail);

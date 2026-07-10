@@ -25,6 +25,10 @@ const insertCard = (parkingSlot, cardsGRP) => {
   else if(parkingSlot.regpri === "GIG/GIC") img = "./src/assets/wheelChair.png"
   else if(parkingSlot.regpri === "PAYANT MIXTE" || parkingSlot.regpri === "PAYANT ROTATIF") img = "./src/assets/car.png";
   else if(parkingSlot.regpri === "AUTRE REGIME") img = "./src/assets/car.png";
+  else if(parkingSlot.regpri === "LOCATION") img = "./src/assets/truck.png";
+  else if(parkingSlot.regpri === "ELECTRIQUE") img = "./src/assets/car.png";
+  else if(parkingSlot.regpri === "GRATUIT") img = "./src/assets/car.png";
+
 
   let card = `<article class="card" data-id="${parkingSlot.id}">
         <h2>${parkingSlot.typevoie} ${parkingSlot.nomvoie}</h2>
