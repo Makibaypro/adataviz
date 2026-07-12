@@ -8,7 +8,7 @@
 // --- FONCTIONS ---
 // -----------------
 
-// --- Ajout d'ID ---
+// --- Ajout d'ID dans les donnees ---
 const addID = (dataArray) => {
   const dataID = [];
   for(let i = 0; i < dataArray.length;i++){
@@ -29,7 +29,7 @@ const insertCard = (parkingSlot, cardsGRP) => {
   else if(parkingSlot.regpri === "ELECTRIQUE") img = "./src/assets/car.png";
   else if(parkingSlot.regpri === "GRATUIT") img = "./src/assets/car.png";
 
-
+  // --- On viens creer nos carte avec nos infos en ay appliquand l'id creer via les donnees --- 
   let card = `<article class="card" data-id="${parkingSlot.id}">
         <h2>${parkingSlot.typevoie} ${parkingSlot.nomvoie}</h2>
         <img src="${img}" alt="PictoPlace" class="imgSize"/>
@@ -69,19 +69,65 @@ export const filtre = (data, research) => {
   return { total: dataTotal, array: dataFiltered};
 }
 
+// --- Filter Panel Fonction ---
+export const filters = (data, formData) => {
+  let dataFiltered = [...data.array];
+  let dataTotal = 0;
+
+  let categorie = formData.get("categorie")
+  let type = formData.get("type")
+  let nbPlace = formData.get("numberFilter");
+  let long = formData.get("longueur");
+  let larg = formData.get("largeur");
+
+  // --- Verification de presence des informations avant de filtrer le tableau de donnees ---
+  if(categorie) {
+    dataFiltered = dataFiltered.filter( element => 
+      element.regpri === categorie
+    )
+  }
+
+  if(type) {
+    dataFiltered = dataFiltered.filter(element => 
+      element.typsta === type
+    )
+  }
+
+  if(nbPlace) {
+    dataFiltered = dataFiltered.filter(element => 
+      element.plarel >= nbPlace
+    )
+  }
+  
+  if(long) {
+    dataFiltered = dataFiltered.filter(element =>
+      element.lon >= long
+    )
+  }
+
+  if(larg) {
+    dataFiltered = dataFiltered.filter(element => 
+      element.lar >= larg
+    )
+  }
+
+  dataTotal = dataFiltered.length;
+
+  return { array: dataFiltered, total: dataTotal};
+}
+
 
 // --- Récuperation des données ---
 export const formaterData = async (link) => {
   try {
     const response = await fetch(link);
     const data = await response.json();
-    // console.log("data :" + data);
+
     const dataArray = data.results;
-    // console.log("dataArray :" + dataArray);
     const dataTotal = dataArray.length;
 
     return { total: dataTotal, array: dataArray }
-
+    
   } catch (error){
     console.error(error.message);
   }
@@ -90,7 +136,7 @@ export const formaterData = async (link) => {
 
 //--- Afficher les cartes ---
 export const displayCard = (data, cardsGRP) => {
-    // --- On applique un ID sur chaque objet de donnee
+    // --- On applique un ID sur chaque objet de donnee ---
     data.array = addID(data.array);
 
     data.array.forEach(parkingSlot => {
@@ -102,28 +148,20 @@ export const displayCard = (data, cardsGRP) => {
 
 //--- Fonction Slider ---
 export const cardSwitch = (centerValue, rail, centerCard) => { 
-  // --- On applique un scale de 1 sur toute les cartes pour que seule la
-  // --- selectionner sois modifier
+  // --- On applique un scale de 1 sur toute les cartes pour que seule la ---
+  // --- selectionner sois modifier ---
   document.querySelectorAll('.card').forEach(card => {
     card.style.transform = 'scale(0.9)';
   });
   // --- On met la valeur a 33 pour decaler la premiere carte au milieu ---
   const stepX = 33;
-  // --- On calcul le nombre de fois ou on doit decaler vers la gauche
-  // --- avec le -() sinon valeur positif et on part a droite
+  // --- On calcul le nombre de fois ou on doit decaler vers la gauche ---
+  // --- avec le -() sinon valeur positif et on part a droite ---
   const offset = -(centerValue - 1) * stepX;
-  // --- on applique le resultat en style inline sur le groupe des cartes
+  // --- on applique le resultat en style inline sur le groupe des cartes ---
   if (rail) rail.style.transform = `translateX(${offset}vw)`;
-  // --- les if verifient que le chargement est bien fait et annule une erreur
-  // --- ou on pourrait avoir un null au chargement de la page
+  // --- les if verifient que le chargement est bien fait et annule une erreur ---
+  // --- ou on pourrait avoir un null au chargement de la page ---
   if (centerCard) centerCard.style.transform = `scale(1.1)`;
 
 }
-
-// // --- Recherche fonction ---
-// export const filter = (word, data) => {
-//   let dataFiltered = data.array.filter((element) => element.nomvoie.includes(word))
-
-//   return dataFiltered;
-
-// }
